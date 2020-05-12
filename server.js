@@ -1,4 +1,5 @@
-var fs = require('fs');
+// var fs = require('fs');
+var http = require('http');
 var https = require('https');
 const express = require('express');
 const app = express();
@@ -35,16 +36,20 @@ app.get('/token', (req, res) => {
 
 app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'build/index.html')));
 
-var options = {
-  key: fs.readFileSync('./file.pem'),
-  cert: fs.readFileSync('./file.crt')
-};
+// var options = {
+//   key: fs.readFileSync('./file.pem'),
+//   cert: fs.readFileSync('./file.crt')
+// };
 
-var server = https.createServer( options, app );
+// var server = https.createServer( options, app );
+// const PORT = process.env.PORT || 443;
+
+var server = http.createServer(app);
+const PORT = process.env.PORT || 8081;
+
 const mysocketserver = require('./mysocketserver');
 mysocketserver.initSocketServer(server);
 
-const PORT = process.env.PORT || 443;
 server.listen(PORT, () => { 
   console.log(`server run at ${PORT} port`);
 })
