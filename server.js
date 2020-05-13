@@ -36,14 +36,6 @@ app.get('/token', (req, res) => {
 
 app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'build/index.html')));
 
-// var options = {
-//   key: fs.readFileSync('./file.pem'),
-//   cert: fs.readFileSync('./file.crt')
-// };
-
-// var server = https.createServer( options, app );
-// const PORT = process.env.PORT || 443;
-
 var server = http.createServer(app);
 const PORT = process.env.PORT || 8081;
 
@@ -54,7 +46,4 @@ server.listen(PORT, () => {
   console.log(`server run at ${PORT} port`);
 })
 
-// let server = app.listen(PORT, (req, res) => {
-//   console.log(`Server Started at PORT ${PORT}`);
-// });
 

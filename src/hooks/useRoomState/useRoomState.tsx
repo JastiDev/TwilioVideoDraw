@@ -6,6 +6,7 @@ type RoomStateType = 'disconnected' | 'connected' | 'reconnecting';
 export default function useRoomState() {
   const { room } = useVideoContext();
   const [state, setState] = useState<RoomStateType>('disconnected');
+
   useEffect(() => {
     const setRoomState = () => setState((room.state || 'disconnected') as RoomStateType);
     setRoomState();

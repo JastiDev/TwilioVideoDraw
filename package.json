@@ -32,7 +32,7 @@
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-pen-draw": "^1.0.2",
+    "react-paper-bindings": "^2.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "socket.io": "^2.3.0",
@@ -40,8 +40,7 @@
     "strip-color": "^0.1.0",
     "twilio": "^3.39.3",
     "twilio-video": "^2.4.0",
-    "typescript": "^3.8.3",
-    "url": "^0.11.0"
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
