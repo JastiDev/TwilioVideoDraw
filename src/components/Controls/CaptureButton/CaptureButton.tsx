@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
-import PhotoSizeSelectLargeIcon from '@material-ui/icons/PhotoSizeSelectLarge';
+// import PhotoSizeSelectLargeIcon from '@material-ui/icons/PhotoSizeSelectLarge';
 import SendIcon from '@material-ui/icons/Send';
 
-import useLocalVideoToggle from '../../../hooks/useLocalVideoToggle/useLocalVideoToggle';
+// import useLocalVideoToggle from '../../../hooks/useLocalVideoToggle/useLocalVideoToggle';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,29 +16,25 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const CaptureButton = (props: { disabled?: boolean, handleCapture: () => void }) => {
+export const CaptureButton = (props: { disabled?: boolean; handleCapture: () => void }) => {
   const classes = useStyles();
-  const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle();
+  // const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle();
 
   const onClickBtn = async () => {
-    if (!isVideoEnabled) return;
+    // if (!isVideoEnabled) return;
     await props.handleCapture();
     // await toggleVideoEnabled(); //It's for the cost optimization
-  }
+  };
 
-  let disabled = props.disabled || !isVideoEnabled;
+  let disabled = props.disabled;
 
   return (
-    <Tooltip
-      title={'Caputre & Send'}
-      placement="top"
-      PopperProps={{ disablePortal: true }}
-    >
-      <Fab className={classes.fab} onClick={onClickBtn}
-        disabled={disabled}
-      >
-        <SendIcon />
-      </Fab>
+    <Tooltip title={'Caputre & Send'} placement="top" PopperProps={{ disablePortal: true }}>
+      <div>
+        <Fab className={classes.fab} onClick={onClickBtn} disabled={disabled}>
+          <SendIcon />
+        </Fab>
+      </div>
     </Tooltip>
-  )
-}
+  );
+};

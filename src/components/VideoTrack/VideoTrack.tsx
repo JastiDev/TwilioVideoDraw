@@ -39,6 +39,6 @@ export default function VideoTrack({ track, isLocal, priority, idvvv }: VideoTra
   const isFrontFacing = track.mediaStreamTrack.getSettings().facingMode !== 'environment';
   const style = isLocal && isFrontFacing ? { transform: 'rotateY(180deg)' } : {};
 
-  if (idvvv) return <Video ref={ref} style={style} id={idvvv}/>;
+  if (idvvv) return <Video ref={ref} style={style} id={idvvv} />;
   else return <Video ref={ref} style={style} />;
 }

@@ -1,9 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 import FlipCameraIosIcon from '@material-ui/icons/FlipCameraIos';
-import { IconButton } from '@material-ui/core';
+// import useLocalVideoToggle from '../../../hooks/useLocalVideoToggle/useLocalVideoToggle';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 
-export default function FlipCameraButton() {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    fab: {
+      margin: theme.spacing(1),
+    },
+  })
+);
+
+export const CameraSwitchButton = (props: { disabled?: boolean }) => {
+  const classes = useStyles();
   const {
     room: { localParticipant },
     localTracks,
@@ -38,15 +51,13 @@ export default function FlipCameraButton() {
     });
   }, [facingMode, getLocalVideoTrack, localParticipant, videoTrack]);
 
-  //   return supportsFacingMode ? (
-  //     <IconButton onClick={toggleFacingMode} disabled={!videoTrack}>
-  //       <FlipCameraIosIcon />
-  //     </IconButton>
-  //  ) : null;
-
   return (
-    <IconButton onClick={toggleFacingMode} disabled={!videoTrack}>
-      <FlipCameraIosIcon />
-    </IconButton>
+    <Tooltip title={'Switch Camera'} placement="top" PopperProps={{ disablePortal: true }}>
+      <div>
+        <Fab className={classes.fab} onClick={toggleFacingMode} disabled={!videoTrack || props.disabled}>
+          <FlipCameraIosIcon />
+        </Fab>
+      </div>
+    </Tooltip>
   );
-}
+};

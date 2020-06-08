@@ -13,6 +13,7 @@ import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 
 import { getSocket, username, room } from './Socket';
+import ReceivedImageNotification from './components/ReceivedImageNotification/ReceivedImageNotification';
 
 const Container = styled('div')({
   display: 'grid',
@@ -22,8 +23,6 @@ const Container = styled('div')({
 const Main = styled('main')({
   overflow: 'hidden',
 });
-
-let videoWidth, videoHeight;
 
 export default function App() {
   const roomState = useRoomState();
@@ -35,46 +34,50 @@ export default function App() {
   // will look good on mobile browsers even after the location bar opens or closes.
   const height = useHeight();
 
-  const [isModal, setIsModal] = useState(false);
-  const [captureURL, setCaptureURL] = useState("");
+  const [isNotify, setIsNotify] = useState(false);
+  const [receivedOne, setReceivedOne] = useState({});
 
-  let socket = getSocket();
+  const [editingOne, setEditingOne] = useState({});
+
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    socket.on('one-joined-room', async (one) => {
+    let socket = getSocket();
+    socket.on('one-joined-room', async one => {
       console.log(one.username);
     });
-    socket.on('one-left-room', async (one) => {
+    socket.on('one-left-room', async one => {
       console.log(one.username);
     });
-    socket.on('one-captured', async (one) => { 
-      console.log('captured', one.username );
-      videoWidth = one.videoWidth;
-      videoHeight = one.videoHeight;
-      setCaptureURL(one.captureURL);
-      setIsModal(true);
+    socket.on('one-captured', async one => {
+      setReceivedOne(one);
+      setIsNotify(true);
     });
   }, []);
 
   useEffect(() => {
-    if (roomState == 'connected') {
-      socket.emit('i-joined-room', { username, room });     
+    let socket = getSocket();
+    if (roomState === 'connected') {
+      socket.emit('i-joined-room', { username, room });
     } else {
       socket.emit('i-left-room', { username, room });
     }
-  }, [ roomState ]);
+  }, [roomState]);
 
   const handleCapture = () => {
     let vvv = document.getElementById('vvv');
-    videoWidth = vvv.videoWidth;
-    videoHeight = vvv.videoHeight;
+    let videoWidth = vvv.videoWidth;
+    let videoHeight = vvv.videoHeight;
+
+    console.log(videoHeight, videoWidth);
 
     let canvas = document.createElement('canvas');
     canvas.width = videoWidth;
     canvas.height = videoHeight;
     let context = canvas.getContext('2d');
 
-    let flipHori = false, flipVert = false;
+    let flipHori = false,
+      flipVert = false;
 
     let scaleHori = flipHori ? -1 : 1, // Set horizontal scale to -1 if flip horizontal
       scaleVert = flipVert ? -1 : 1, // Set verical scale to -1 if flip vertical
@@ -85,18 +88,23 @@ export default function App() {
     context.drawImage(vvv, posX, posY, videoWidth, videoHeight);
 
     let url = canvas.toDataURL('image/png');
-    setCaptureURL(url);
-    setIsModal(true);
 
-    socket.emit('i-captured', { username, room, captureURL: url, videoWidth, videoHeight });
-  }
+    let one = { username, room, captureURL: url, videoWidth, videoHeight };
+    setEditingOne(one);
 
-  const handleClose = () => { 
-    setIsModal(false);
-  }
+    setIsEditing(true);
+
+    // let socket = getSocket();
+    // socket.emit('i-captured', { username, room, captureURL: url, videoWidth, videoHeight });
+  };
+
+  const handleOpenNotify = () => {
+    setEditingOne(receivedOne);
+    setIsEditing(true);
+  };
 
   const modalStyle = {
-    position: "absolute",
+    position: 'absolute',
     top: '50%',
     left: '50%',
     height: '95%',
@@ -111,17 +119,23 @@ export default function App() {
     <Container style={{ height }}>
       <MenuBar />
       <Main>
-        {(roomState === 'disconnected') ? <LocalVideoPreview /> : <Room />}
+        {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls handleCapture={handleCapture} />
       </Main>
       <ReconnectingNotification />
 
-      <Modal open={isModal} onClose={handleClose}>
+      <ReceivedImageNotification
+        isNotify={isNotify}
+        username={receivedOne.username}
+        handleClose={() => setIsNotify(false)}
+        handleOpen={handleOpenNotify}
+      />
+
+      <Modal open={isEditing} onClose={() => setIsEditing(false)}>
         <div style={modalStyle}>
-          <EditCapture captureURL={captureURL} videoWidth={videoWidth} videoHeight={videoHeight} handleClose={handleClose}/>
+          <EditCapture one={editingOne} handleClose={() => setIsEditing(false)} />
         </div>
       </Modal>
-
     </Container>
   );
 }

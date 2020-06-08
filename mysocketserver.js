@@ -1,11 +1,6 @@
-const socketio = require("socket.io");
-
-let io;
-
 let dicStar = {};
 
-const initSocketServer = (server) => {
-  io = socketio(server);
+const initSocketServer = (io) => {
 
   const nspDraw = io.of("/twilio-draw");
 
@@ -38,10 +33,11 @@ const initSocketServer = (server) => {
       socket.to(room).emit('one-captured', { username, room, captureURL, videoWidth, videoHeight });
     });
 
-    socket.on('i-draw', ({ username, room, drawterm }) => {
-      // console.log(username, room, drawterm);
-      socket.to(room).emit('one-draw', { username, drawterm });
-    });
+    // This functionality was for a real time draw sharing, but deprecated for UX requirement change.
+    // socket.on('i-draw', ({ username, room, drawterm }) => {
+    //   // console.log(username, room, drawterm);
+    //   socket.to(room).emit('one-draw', { username, drawterm });
+    // });
   });
 };
 

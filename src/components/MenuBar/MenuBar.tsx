@@ -17,7 +17,7 @@ import { Typography } from '@material-ui/core';
 import FlipCameraButton from './FlipCameraButton/FlipCameraButton';
 import { DeviceSelector } from './DeviceSelector/DeviceSelector';
 
-import { setUsername, setRoom } from '../../Socket'; 
+import { setUsername, setRoom } from '../../Socket';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

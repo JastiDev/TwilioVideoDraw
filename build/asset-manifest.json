@@ -1,21 +1,25 @@
 {
   "files": {
-    "main.js": "/static/js/main.74000817.chunk.js",
-    "main.js.map": "/static/js/main.74000817.chunk.js.map",
+    "main.css": "/static/css/main.53c401e5.chunk.css",
+    "main.js": "/static/js/main.e88827dd.chunk.js",
+    "main.js.map": "/static/js/main.e88827dd.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.fa60846a.js",
     "runtime-main.js.map": "/static/js/runtime-main.fa60846a.js.map",
-    "static/js/2.5b7765c0.chunk.js": "/static/js/2.5b7765c0.chunk.js",
-    "static/js/2.5b7765c0.chunk.js.map": "/static/js/2.5b7765c0.chunk.js.map",
+    "static/js/2.261156e8.chunk.js": "/static/js/2.261156e8.chunk.js",
+    "static/js/2.261156e8.chunk.js.map": "/static/js/2.261156e8.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.4895c289a8658389e134484a386a48e4.js": "/precache-manifest.4895c289a8658389e134484a386a48e4.js",
+    "precache-manifest.19ae888304f648a465dec9f8fd23481f.js": "/precache-manifest.19ae888304f648a465dec9f8fd23481f.js",
     "service-worker.js": "/service-worker.js",
-    "static/js/2.5b7765c0.chunk.js.LICENSE.txt": "/static/js/2.5b7765c0.chunk.js.LICENSE.txt",
+    "static/css/main.53c401e5.chunk.css.map": "/static/css/main.53c401e5.chunk.css.map",
+    "static/js/2.261156e8.chunk.js.LICENSE.txt": "/static/js/2.261156e8.chunk.js.LICENSE.txt",
     "static/media/google-logo.06c50bce.svg": "/static/media/google-logo.06c50bce.svg",
+    "static/media/Toolbar.css": "/static/media/ico_trash.919c2866.svg",
     "static/media/twilio-logo.62d2e629.svg": "/static/media/twilio-logo.62d2e629.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.fa60846a.js",
-    "static/js/2.5b7765c0.chunk.js",
-    "static/js/main.74000817.chunk.js"
+    "static/js/2.261156e8.chunk.js",
+    "static/css/main.53c401e5.chunk.css",
+    "static/js/main.e88827dd.chunk.js"
   ]
 }

@@ -25,7 +25,7 @@ export default function ParticipantTracks({
   disableAudio,
   enableScreenShare,
   videoPriority,
-  idvvv
+  idvvv,
 }: ParticipantTracksProps) {
   const { room } = useVideoContext();
   const publications = usePublications(participant);

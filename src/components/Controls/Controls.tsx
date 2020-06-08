@@ -9,7 +9,9 @@ import ToggleScreenShareButton from './ToogleScreenShareButton/ToggleScreenShare
 
 import useIsUserActive from './useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
+
 import { CaptureButton } from './CaptureButton/CaptureButton';
+import { CameraSwitchButton } from './CameraSwitchButton/CameraSwitchButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Controls(props: {handleCapture:()=>void}) {
+export default function Controls(props: { handleCapture: () => void }) {
   const classes = useStyles();
   const roomState = useRoomState();
   const isReconnecting = roomState === 'reconnecting';
@@ -46,9 +48,8 @@ export default function Controls(props: {handleCapture:()=>void}) {
 
   return (
     <div className={clsx(classes.container, { showControls })}>
-      {roomState !== 'disconnected' && (
-        <CaptureButton disabled={isReconnecting} handleCapture={props.handleCapture} />
-      )}
+      {/* <CameraSwitchButton disabled={isReconnecting} /> */}
+      {roomState !== 'disconnected' && <CaptureButton disabled={isReconnecting} handleCapture={props.handleCapture} />}
       <ToggleAudioButton disabled={isReconnecting} />
       <ToggleVideoButton disabled={isReconnecting} />
       {roomState !== 'disconnected' && (

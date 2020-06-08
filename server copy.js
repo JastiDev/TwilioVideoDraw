@@ -34,12 +34,17 @@ app.get('/token', (req, res) => {
 app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'build/index.html')));
 
 
-// const IP = process.env.IP || "0.0.0.0";
-const PORT = process.env.PORT || 8081;
-let server = app.listen(PORT, () => {
-  console.log(`server run at ${PORT} port`);
-});
+// const https = require('https');
+// const fs = require('fs');
+// let key = fs.readFileSync('./file.pem');
+// let cert = fs.readFileSync('./file.crt');
+// let server = https.createServer({ key, cert });
+// server.listen(443);
 
-const io = require("socket.io").listen(server);
+
+
+const http = require('http');
+const server = http.createServer().listen(8081);
+const io = require('socket.io')(server);
+
 require('./mysocketserver').initSocketServer(io);
-
