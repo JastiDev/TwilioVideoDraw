@@ -11,7 +11,7 @@
 
 
 
-# Twilio Video React App
+
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-app-react.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-app-react)
 
