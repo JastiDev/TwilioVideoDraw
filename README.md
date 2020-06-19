@@ -1,3 +1,16 @@
+# Twilio Video React Free Draw Chat
+## Users can enjoy the free-drawing tools in the twilio video chat room!
+
+**Screenshot** 
+![Screenshot](/readme/twilio-draw.gif)
+
+- Twilio Video Chat
+- Twilio Screen Share
+- Drawing tools using canvas
+- Socket.io is used for real time msg handling
+
+
+
 # Twilio Video React App
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-app-react.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-app-react)
